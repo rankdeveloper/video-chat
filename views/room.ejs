@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hola-amigo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script>
+      const ROOM_ID = "<%= roomId %>";
+
+
+    </script>
+
+    <style>
+          .logo{
+            display: flex;
+            background-color: #7280d8;
+            border-bottom: 1px solid whitesmoke;
+            padding:1rem 2rem;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+
+        }
+
+        .logo h3{
+            color: white;
+            font-size: 2rem;
+            /* border: 1px solid red;; */
+        }
+
+        nav {
+            /* float: right; */
+        }
+
+        nav a{
+            padding:.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            color: white;
+            border-right: 1px solid #7280d8;
+            border-radius: 5px;
+        }
+        nav a:hover{
+            color: white;
+            border-right: 1px solid white;
+            transition: .5s ease;
+        }
+    </style>
+  </head>
+  <body>
+
+
+<!-- <div class="info" id="info">
+  <form id="form">
+    <input type="text" id="input" placeholder="Your name">
+    <button onclick="submit">Submit</button>
+  </form>
+
+  <button onclick="close()">Close</button>
+</div> -->
+
+<div class="body1" id="body">
+
+
+
+    <div class="header">
+    
+      <div class="logo">
+        <h3>hola<span style="padding-top: 1rem; font-size: 3rem; color: #7280d8; margin-left: 5px; background-color: white;">Amigo</span></h3>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About us</a>
+            <a href="/contact">Feedback</a>
+        </nav>
+
+        <div class="header__back">
+          <i class="fas fa-angle-left"></i>
+        </div>
+    </div>
+    </div>  
+    <div class="main">  
+
+      <div class="main__right">
+        <h2>Messages</h2>
+        <div class="main__chat_window">
+            <div class="messages">
+  
+            </div>
+        </div>
+        <div class="main__message_container">
+          <input id="chat_message" type="text" autocomplete="off" placeholder="Type message here...">
+          <div id="send" class="options__button">
+            <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+            <i class="fas fa-paper-plane"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="dialog" style="display: none;"><h2>Dialog box</h2></div>
+    <div class="main__left">
+      <div class="videos__group">
+        <div id="video-grid">
+
+        </div>
+      </div>
+      <div class="options">
+        <div class="options__left">
+          <div id="stopVideo" class="options__button">
+            <i class="fa fa-video-camera"></i>
+          </div>
+
+          <div id="muteButton" class="options__button">
+            <i class="fa fa-microphone"></i>
+          </div>
+
+          
+          <div id="" class="options__button">
+            <i class="fas fa-circle" onclick="startRecording()"></i>
+            <!-- <i class="fas fa-paper-plane"></i> -->
+            <!-- <i class="fa-solid fa-record-vinyl" onclick="startRecording()"></i> -->
+            <!-- <button onclick="startRecording()">Record</button> -->
+          </div>
+
+          <div id="" class="options__button">
+            <i class="fas fa-stop-circle" onclick="stopRecording()"></i>
+            <!-- <button onclick="stopRecording()">Stop Record</button> -->
+          </div>
+
+          <div id="" class="options__button">
+            <i class="fas fa-desktop" id="screenShareButton"></i>
+            <!-- <button onclick="screenShare()">ScreenShare</button> -->
+          </div>
+          <div id="showChat" class="options__button">
+            <i class="fa fa-comment"></i>
+          </div>
+        </div>
+        <div class="options__right">
+          <div id="inviteButton" class="options__button">
+            <i class="fas fa-user-plus"></i>
+            <!-- <i class="fas fa-envelope"></i> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+  </body>
+  <script src="script.js"></script>
+</html>

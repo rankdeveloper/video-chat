@@ -1,0 +1,249 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color: #7280d8;
+            font-family: Arial, Helvetica, sans-serif;
+        } */
+
+        body {
+            background-color: black;
+             height: 100vh;
+             overflow: hidden;
+        }
+
+        .contact {
+            display: flex;
+            padding: 2rem 0;
+            /* border: 1px solid red; */
+            align-items: center;
+
+        }
+
+        .contact .img {
+            width: 50%;
+            /* border:1px solid red; */
+            /* height: 50%; */
+        }
+
+        .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: mymove 4s infinite forwards;
+        }
+
+        .form {
+            width: 50%;
+            /* border: 1px solid #7280d8; */
+            /* border-radius: .5rem; */
+            padding: 0 2rem;
+            /* border:1px solid red; */
+        }
+
+        .form h2 {
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        form>label {
+            color: #7280d8;
+        }
+
+        .form form>input {
+            margin-bottom: 1.5rem;
+            color: #fdfdfd;
+            border: none;
+            /* border-top: 2px solid #7280d8; */
+            border-bottom: 2px solid #7280d8;
+            width: 100%;
+            height: 2rem;
+            background-color: transparent;
+            outline-style: none;
+        }
+
+        form button {
+            background-color: #7280d8;
+            padding: 1rem 2rem;
+            margin-top: 2rem;
+            color: black;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        textarea {
+            color: #fdfdfd;
+            resize: vertical;
+            width: 100%;
+            height: 6rem;
+            background-color: transparent;
+            outline-style: none;
+            border: none;
+            border-bottom: 2px solid #7280d8;
+        }
+
+        /* .logo{
+            display: flex;
+            background-color: black;
+            padding:1rem 2rem;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+
+        }
+
+        .logo h3{
+            color: white;
+            font-size: 2rem;
+       
+        }
+
+      
+
+        nav a{
+            padding:.5rem;
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #7280d8;
+            border-right: 1px solid #7280d8;
+            border-radius: 5px;
+        }
+        nav a:hover{
+            color: white;
+            border-right: 1px solid white;
+            transition: .3s ease;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- <div class="header"> -->
+        <div class="logo">
+          <h3>hola<span style="padding-top: 1rem; font-size: 3rem; color: #7280d8; margin-left: 5px;">Amigo</span></h3>
+  
+          <nav>
+              <a href="/">Home</a>
+              <a href="/room">Convo</a>
+              <a href="/about">About us</a>
+          </nav>
+  
+         
+      </div>
+      <!-- </div>  -->
+
+    <div class="contact">
+
+        <div class="img">
+            <img src="/img/text_chat.png" />
+        </div>
+
+        <div class="form">
+
+            <h2>We'd love to hear from you!</h2>
+          
+
+            <form id="form">
+
+                <label for="username">Your name</label>
+                <input type="text" id="username" />
+
+                <label for="email">Email Id</label>
+                <input type="email" id="emailId" />
+
+                <label for="message">Message</label>
+                <textarea id="message"></textarea>
+
+                <button type="submit">Send</button>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <script type="module">
+
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+     
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyArTOlR8FJ06rD8MvE8wHXW5fGZmLE-sKg",
+            authDomain: "hola-amigo-4e2ef.firebaseapp.com",
+            projectId: "hola-amigo-4e2ef",
+            storageBucket: "hola-amigo-4e2ef.appspot.com",
+            messagingSenderId: "1058777787505",
+            appId: "1:1058777787505:web:225e3b849ca8da8d7bffd0",
+            measurementId: "G-69GD7SXXRG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const firestore = getFirestore(app);
+
+        var messageRef = collection(firestore, 'users')
+
+        document.getElementById("form").addEventListener("submit", submitForm)
+
+        function submitForm(e) {
+            e.preventDefault();
+            var userName = document.getElementById("username").value
+            var emailId = document.getElementById("emailId").value
+            var message = document.getElementById("message").value
+
+
+
+            saveMessage(userName, emailId, message)
+
+            // document.querySelector('.alert').style.display = 'block';
+
+            // setTimeout( () => {
+            //     document.querySelector('.alert').style.display = 'none';
+            // }, 3000 )
+
+            document.getElementById("form").reset();
+
+        }
+        function saveMessage(userName, emailId, message) {
+            addDoc(messageRef, {
+                userName: userName,
+                emailId: emailId,
+                message: message
+            })
+                .then(() => {
+                    console.log("Data saved");
+                    alert("Thank you for your message!");
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                    alert("An error occurred. Please try again later.");
+                });
+        }
+
+    </script>
+
+</body>
+
+</html>

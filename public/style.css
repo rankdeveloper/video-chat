@@ -1,0 +1,381 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --main-darklg: #1d2635;
+  --main-dark: white;
+  --primary-color: #7280d8;
+  --main-light: #eeeeee;
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
+  position: relative;
+  width: 100%; */
+  /* background-color: var(--main-darklg); */
+}
+
+/* .logo > h3 {
+  color: var(--main-light);
+} */
+
+.main {
+  overflow: hidden;
+  height: 90vh;
+  display: flex;
+}
+
+.main__left {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.videos__group {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  /* background-color: var(--main-dark); */
+  background-color: #7280d8;
+}
+
+video {
+  height: 250px;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  width: 350px;
+  /* background-color:#7280d8 ; */
+  /* filter: blur(2px);
+  border:1px solid white; */
+  object-fit: cover;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+.options {
+  padding: .5rem;
+  display: flex;
+  position: absolute;
+  top: 50;
+
+  flex-direction: column-reverse;
+  /* background-color: var(--main-darklg); */
+  /* border:1px solid red; */
+  gap: 3rem;
+}
+
+.options__left {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem
+}
+
+.options__right {
+  margin-left: auto;
+}
+
+.options__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  height: 40px;
+  border-radius: 5px;
+  color: var(--main-light);
+  font-size: 1.2rem;
+  width: 40px;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.options__button:hover {
+  transform: scale(1.05);
+  transition: .3s ease;
+}
+
+.background__red {
+  background-color: #f6484a;
+}
+
+.main__right {
+  display: flex;
+  flex-direction: column;
+  flex: 0.3;
+  background-color: #242f41;
+}
+
+.main__right>h2 {
+  margin-top: 1rem;
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 1px solid;
+}
+
+.main__chat_window {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.main__chat_window::-webkit-scrollbar {
+  display: none;
+}
+
+.main__message_container {
+  padding: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__message_container>input {
+  height: 40px;
+  flex: 1;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding-left: 20px;
+  border: none;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.message>b {
+  color: #eeeeee;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.message>b>i {
+  margin-right: 0.7rem;
+  font-size: 1rem;
+}
+
+.message>span {
+  background-color: #eeeeee;
+  margin: .5rem 0;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.message>span>i {
+  font-size: .8rem;
+  /* float: right; */
+  margin-bottom: .5rem;
+}
+
+#video-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#showChat {
+  display: none;
+}
+
+.header__back {
+  display: none;
+  position: absolute;
+  font-size: 1.3rem;
+  top: 17px;
+  left: 28px;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .main__right {
+    display: none;
+  }
+
+  .main__left {
+    width: 100%;
+    flex: 1;
+  }
+
+  video {
+    height: auto;
+    width: 100%;
+  }
+
+  #showChat {
+    display: flex;
+  }
+}
+
+
+/* home page css */
+
+.home-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  margin-top: 2rem;
+  /* height: 90vh; */
+}
+
+.left {
+  width: 50%;
+  /* border:1px solid red; */
+  padding:1rem;
+}
+
+.left h2 {
+  font-size: 4rem;
+  line-height: 3.5rem;
+  line-height: 4.5rem;
+  color: #7280d8;
+}
+
+.left h2 .text-h{
+  background-color: whitesmoke;
+  border-bottom:5px solid #7280d8;
+  padding:5px;
+ transform: rotate(-5deg);
+}
+
+.left p {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 25px;
+  color: #e5e7eb;
+  font-weight: 300;
+}
+
+.left .start {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #7280d8;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cards .one {
+  width: 200px;
+  height: 200px;
+  padding: 5px;
+  background-color: #7280d8;
+  border-radius: 5px;
+  object-fit: cover;
+  /* border: 1px solid red; */
+
+  /* transition: step-start; */
+}
+
+@keyframes mymove {
+
+  0% {
+      
+      transform: translateX(-5px) rotate(10deg) scale(1);
+  
+  }
+
+  50% {
+      /* width: 205px;
+      height: 255px; */
+      transform: translateX(4px) rotate(5deg) scale(1.1);
+      /* transform: rotate(20deg); */
+      
+  }
+
+  75% {
+      /* width: 205px;
+      height: 255px; */
+      transform: translateX(-5px) rotate(5deg) scale(1.1);
+      /* transform: rotate(20deg); */
+  }
+
+  100% {
+      transform: translateX(0px) rotate(-5deg) scale(1.2);
+  }
+
+}
+
+.one img {
+  animation: mymove 4s infinite forwards;
+  transition: .5s ease;
+  width: 100%;
+  height: 100%;
+  /* transform: scale(1.1); */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.right {
+  width: 50%;
+  /* border:1px solid red; */
+}
+
+.logo{
+  display: flex;
+  background-color: black;
+  border-bottom: 1px solid whitesmoke;
+  padding:0rem 2rem;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.logo h3{
+  color: white;
+  font-size: 2rem;
+  /* border: 1px solid red;; */
+}
+
+nav {
+  /* float: right; */
+}
+
+nav a{
+  padding:.5rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #7280d8;
+  border-right: 1px solid #7280d8;
+  border-radius: 5px;
+}
+nav a:hover{
+  color: white;
+  border-right: 1px solid white;
+  transition: .3s ease;
+}
