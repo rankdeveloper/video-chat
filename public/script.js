@@ -28,7 +28,7 @@ let user=prompt("your name : " , )
 // let user;
 
 var peer = new Peer({
-  host: '127.0.0.1',
+  host: 'localhost',
   port: 3030,
   path: '/peerjs',
   config: {
@@ -60,25 +60,25 @@ var peer = new Peer({
 
 
 // let user;
-const getUserValue = () => {
-  return new Promise((resolve, reject) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const user = document.getElementById('input').value;
-      resolve(user);
-    });
-  });
-};
+// const getUserValue = () => {
+//   return new Promise((resolve, reject) => {
+//     form.addEventListener('submit', (e) => {
+//       e.preventDefault();
+//       const user = document.getElementById('input').value;
+//       resolve(user);
+//     });
+//   });
+// };
 
-getUserValue()
-  .then(user => {
-    info.style.display = "none";
-    body1.style.display = "block";
-    console.log("user value", user);
-  })
-  .catch(error => {
-    console.error("Error getting user value:", error);
-  });
+// getUserValue()
+//   .then(user => {
+//     info.style.display = "none";
+//     body1.style.display = "block";
+//     console.log("user value", user);
+//   })
+//   .catch(error => {
+//     console.error("Error getting user value:", error);
+//   });
 
   // alert("user value" , user)
 
