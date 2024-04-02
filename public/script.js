@@ -208,7 +208,7 @@ stopVideo.addEventListener("click", () => {
     stopVideo.innerHTML = html;
   } else {
     myVideoStream.getVideoTracks()[0].enabled = true;
-    html = `<i class="fas fa-video"></i>`;
+    html = `<i class="fas fa-video" data-tooltip="Hide camera"></i>`;
     stopVideo.classList.toggle("background__red");
     stopVideo.innerHTML = html;
   }
@@ -216,7 +216,7 @@ stopVideo.addEventListener("click", () => {
 
 inviteButton.addEventListener("click", (e) => {
   prompt(
-    "Copy this link and send it to people you want to meet with",
+    "Share this link to your friend : ",
     window.location.href
   );
 });
@@ -236,7 +236,9 @@ socket.on("createMessage", (message, userName) => {
 
 let chunks = []
 function startRecording() {
-  // stopBtn.style.display = "block"
+document.getElementById('startRecording').style.display="none"
+document.getElementById('stopRecording').style.display="flex"
+
   // pauseBtn.style.display = "block"
   // resumeBtn.style.display = "block"
   // recordBtn.style.display = "none"
@@ -252,7 +254,9 @@ function startRecording() {
 }
 
 function stopRecording() {
-  // stopBtn.style.display = "none"
+  document.getElementById('stopRecording').style.display="none"
+document.getElementById('startRecording').style.display="flex"
+
   // pauseBtn.style.display = "none"
   // resumeBtn.style.display = "none"
   // startBtn.style.display = "block"

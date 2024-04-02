@@ -318,15 +318,10 @@ video {
       
   }
 
-  75% {
-      /* width: 205px;
-      height: 255px; */
-      transform: translateX(-5px) rotate(5deg) scale(1.1);
-      /* transform: rotate(20deg); */
-  }
+ 
 
   100% {
-      transform: translateX(0px) rotate(-5deg) scale(1.2);
+      transform: translateX(2px) rotate(0deg) scale(1);
   }
 
 }
