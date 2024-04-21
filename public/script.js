@@ -20,13 +20,36 @@ showChat.addEventListener("click", () => {
 });
 
 // const user = prompt("Enter your name");
-const form = document.getElementById('form')
-let info = document.getElementById('info')
-let body1 = document.getElementById('body')
+const form = document.getElementById('form');
+const input = document.getElementById('input');
+const info = document.getElementById('info');
+const body1 = document.getElementById('body');
 
-let user=prompt("your name : " , )
-// let user;
+// Hide video call section initially
+// document.querySelector(".main__left").style.display = "none";
+// document.querySelector(".main__right").style.display = "none";
+// document.querySelector(".header__back").style.display = "none";
 
+// form.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   const username = input.value.trim();
+//   if (username) {
+//       // Hide the form and show the video call section
+//       info.style.display = "none";
+//       body1.style.display = "block";
+
+//       // Start the video call functionality with the provided username
+//       startVideoCall(username);
+//   } else {
+//       alert("Please enter your name.");
+//   }
+// });
+let user=prompt("Enter your name : ");
+
+
+// function startVideoCall(user){
+
+  
 var peer = new Peer({
   host: 'localhost',
   port: 3030,
@@ -327,4 +350,7 @@ async function startScreenSharing() {
 }
 
 
+
+
+// }
 
