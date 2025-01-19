@@ -1,160 +1,149 @@
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About us</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <style>
-        body {
-            background-color: black;
-            color: white;
-        }
+      body {
+        background-color: black;
+        color: white;
+      }
 
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem 0;
-            /* border: 1px solid red; */
-            background-color: white;
-        }
+      .services {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 2rem 0;
 
+        background-color: white;
+      }
 
+      .card .img {
+        height: 100px;
+        width: 100px;
+      }
 
+      .card .img img {
+        height: 100%;
+        width: 100%;
+      }
 
-        .card .img {
-            height: 100px;
-            width: 100px;
-        }
+      .services .card {
+        width: 300px;
+        min-height: 300px;
+        padding: 10px 20px;
+        border: 1px solid white;
+        background-color: #7280d8;
+      }
 
-        .card .img img {
-            height: 100%;
-            width: 100%;
-        }
+      .services .card:hover {
+        background-color: white;
+        color: #020403;
+        transition: 0.3s ease-in-out;
+      }
 
-        .services .card {
-            width: 300px;
-            min-height: 300px;
-            padding: 10px 20px;
-            border: 1px solid white;
-            background-color: #7280d8;
-        }
+      .services .card button:hover {
+        border: 1px solid black;
+      }
 
-        .services .card:hover {
-            background-color: white;
-            color: #020403;
-            /* border: 1px solid #7280d8; */
-            transition: .3s ease-in-out;
-        }
+      .card h2 {
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        border-bottom: 2px solid white;
+      }
 
-        .services .card button:hover {
-            border: 1px solid black;
-        }
+      .card p {
+        margin-bottom: 1rem;
+      }
 
-        .card h2 {
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            border-bottom: 2px solid white;
-        }
+      .card button {
+        padding: 10px 20px;
+        background-color: black;
+        cursor: pointer;
+        border: 1px solid #020403;
+      }
 
-        .card p {
-            margin-bottom: 1rem;
-        }
+      .about-heading {
+        background-color: #7280d8;
+        padding: 1.5rem 2rem;
+      }
 
-        .card button {
-            padding: 10px 20px;
-            background-color: black;
-            cursor: pointer;
-            border: 1px solid #020403;
-        }
+      .about-heading h2 {
+        font-size: 2rem;
+        /* border:1px solid red; */
+        margin-bottom: 1.5rem;
+      }
 
-        .about-heading {
-            background-color: #7280d8;
-            padding: 1.5rem 2rem;
-        }
-
-        .about-heading h2 {
-
-            font-size: 2rem;
-            /* border:1px solid red; */
-            margin-bottom: 1.5rem;
-        }
-
-        .about-heading p {
-            font-size: 1.2rem;
-            line-height: 1.5rem;
-            color: black;
-        }
+      .about-heading p {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        color: black;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="logo">
-        <h3>hola<span style="padding-top: 1rem; font-size: 3rem; color: #7280d8; margin-left: 5px;">Amigo</span></h3>
+      <h3>
+        hola<span
+          style="
+            padding-top: 1rem;
+            font-size: 3rem;
+            color: #7280d8;
+            margin-left: 5px;
+          "
+          >Amigo</span
+        >
+      </h3>
 
-        <nav>
-            <a href="/">Home</a>
-            <a href="/room">Convo</a>
-            <a href="/contact">Feedback</a>
-        </nav>
-
-
+      <nav>
+        <a href="/">Home</a>
+        <a href="/room">Convo</a>
+        <a href="/contact">Feedback</a>
+      </nav>
     </div>
 
-
     <div class="about-heading">
-        <h2>About Us - hola Amigo</h2>
-        <p>Welcome to our video chat web app! We're excited to introduce you to our team and the mission behind our
-            project.</p>
+      <h2>About Us - hola Amigo</h2>
+      <p>
+        Welcome to our video chat web app! We're excited to introduce you to our
+        team and the mission behind our project.
+      </p>
     </div>
 
     <div class="services">
+      <div class="card">
+        <h2>Developer</h2>
+        <p>
+          My name is Rankush, and I'm the developer behind this project. I've
+          created this video chat web app with a passion for providing users
+          with a seamless communication experience
+        </p>
+      </div>
 
-        <div class="card">
+      <div class="card">
+        <h2>Our Mission</h2>
+        <p>
+          The mission of this project is to offer a simple yet effective video
+          chat solution that allows users to connect with others effortlessly,
+          whether for personal or professional purposes.
+        </p>
+      </div>
 
-            <h2>Developer</h2>
-            <p>My name is Rankush, and I'm the developer behind this project. I've created this video chat web app with
-                a passion for providing users with a seamless communication experience</p>
-            <!-- <button>View</button> -->
-        </div>
-
-        <div class="card">
-            <h2>Our Mission</h2>
-            <p>The mission of this project is to offer a simple yet effective video chat solution that allows users to
-                connect with others effortlessly, whether for personal or professional purposes.</p>
-            <!-- <button>View</button> -->
-        </div>
-
-        <div class="card">
-            <h2>Key Features</h2>
-            <p>This video chat web app comes with the following features:</p>
-            <ul>
-                <li>High-quality video and audio</li>
-                <li>Easy-to-use interface</li>
-                <li>Instant messaging during calls</li>
-                <li>No need for downloads or installations</li>
-            </ul>
-            <!-- <button>View</button> -->
-        </div>
-
-        <!-- <div class="card">
-            <img class="img" src="./img/code.svg">
-            <h2>Web Design </h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, vel.</p>
-            <button>View</button>
-        </div> -->
-
-
-
-
+      <div class="card">
+        <h2>Key Features</h2>
+        <p>This video chat web app comes with the following features:</p>
+        <ul>
+          <li>High-quality video and audio</li>
+          <li>Easy-to-use interface</li>
+          <li>Instant messaging during calls</li>
+          <li>No need for downloads or installations</li>
+        </ul>
+      </div>
     </div>
-
-
-
-</body>
-
+  </body>
 </html>
