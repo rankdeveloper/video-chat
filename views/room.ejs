@@ -14,19 +14,18 @@
 
     <style>
       .logo {
-        display: flex;
         background-color: #7280d8;
-        border-bottom: 1px solid whitesmoke;
-        padding: 1rem 2rem;
-        justify-content: space-between;
-        align-items: center;
-        height: 10vh;
+        /* border-bottom: 1px solid whitesmoke; */
+        border: none;
+
+        @media screen and (max-width: 400px) {
+          border: none;
+        }
       }
 
       .logo h3 {
         color: white;
         font-size: 2rem;
-        /* border: 1px solid red;; */
       }
 
       nav a {
@@ -63,35 +62,58 @@
         z-index: 1;
         font-family: Arial, Helvetica, sans-serif;
       }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .mobile-nav {
+        box-shadow: 2px 4px 4px rgba(52, 52, 52, 1);
+        background: #7280d8;
+        border-bottom: none;
+      }
+      .mobile-nav a {
+        color: white;
+        border-bottom: none;
+        &:hover {
+          color: black;
+        }
+      }
+      .main {
+        border-top: 1px solid white;
+      }
     </style>
   </head>
 
   <body>
-    <div class="body1" id="body">
-      <div class="header">
-        <div class="logo">
-          <h3>
-            hola<span
-              style="
-                padding-top: 1rem;
-                font-size: 3rem;
-                color: #7280d8;
-                margin-left: 5px;
-                background-color: white;
-              "
-              >Amigo</span
-            >
-          </h3>
+    <div class="body" id="body">
+      <div class="logo" style="background-color: #7280d8">
+        <h3 style="color: #020403">
+          hola<span style="color: white">AMIGO</span>
+        </h3>
 
-          <nav>
-            <a href="/">Home</a>
+        <nav class="desktop-nav">
+          <a href="/room">Convo</a>
+          <a href="/about">About us</a>
+          <a href="/contact">Feedback</a>
+        </nav>
+        <div class="header__back">
+          <i class="fas fa-angle-left"></i>
+        </div>
+
+        <div class="mobile-menu">
+          <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <nav class="mobile-nav" id="mobileNav">
+            <a href="/room">Convo</a>
             <a href="/about">About us</a>
             <a href="/contact">Feedback</a>
           </nav>
-
-          <div class="header__back">
-            <i class="fas fa-angle-left"></i>
-          </div>
         </div>
       </div>
       <div class="main">
@@ -136,9 +158,6 @@
                   onclick="startRecording()"
                   data-tooltip="Recording"
                 ></i>
-                <!-- <i class="fas fa-paper-plane"></i> -->
-                <!-- <i class="fa-solid fa-record-vinyl" onclick="startRecording()"></i> -->
-                <!-- <button onclick="startRecording()">Record</button> -->
               </div>
 
               <div id="stopRecording" class="options__button">
@@ -147,8 +166,6 @@
                   onclick="stopRecording()"
                   data-tooltip="Stop recording"
                 ></i>
-
-                <!-- <button onclick="stopRecording()">Stop Record</button> -->
               </div>
 
               <div id="" class="options__button">
@@ -157,7 +174,6 @@
                   id="screenShareButton"
                   data-tooltip="Screen-share"
                 ></i>
-                <!-- <button onclick="screenShare()">ScreenShare</button> -->
               </div>
               <div id="showChat" class="options__button">
                 <i class="fa fa-comment"></i>
@@ -166,13 +182,26 @@
             <div class="options__right">
               <div id="inviteButton" class="options__button">
                 <i class="fas fa-user-plus"></i>
-                <!-- <i class="fas fa-envelope"></i> -->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div id="custom-prompt" class="prompt-overlay" style="display: none">
+      <div class="prompt-modal">
+        <h3>Enter your name :</h3>
+        <input type="text" id="prompt-input" placeholder="Your name..." />
+        <button id="prompt-btn">Continue</button>
+      </div>
+    </div>
   </body>
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobileNav").classList.toggle("active");
+      document.querySelector(".hamburger").classList.toggle("active");
+    }
+  </script>
   <script src="script.js"></script>
 </html>

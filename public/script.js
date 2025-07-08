@@ -20,96 +20,65 @@ showChat.addEventListener("click", () => {
 });
 
 // const user = prompt("Enter your name");
-const form = document.getElementById('form');
-const input = document.getElementById('input');
-const info = document.getElementById('info');
-const body1 = document.getElementById('body');
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const info = document.getElementById("info");
+const body1 = document.getElementById("body");
 
-// Hide video call section initially
-// document.querySelector(".main__left").style.display = "none";
-// document.querySelector(".main__right").style.display = "none";
-// document.querySelector(".header__back").style.display = "none";
+let user = prompt("Enter your name : ");
 
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   const username = input.value.trim();
-//   if (username) {
-//       // Hide the form and show the video call section
-//       info.style.display = "none";
-//       body1.style.display = "block";
-
-//       // Start the video call functionality with the provided username
-//       startVideoCall(username);
-//   } else {
-//       alert("Please enter your name.");
-//   }
-// });
-let user=prompt("Enter your name : ");
-
-
-// function startVideoCall(user){
-
-  
 var peer = new Peer({
-  host: 'localhost',
+  host: "localhost",
   port: 3030,
-  path: '/peerjs',
+  path: "/peerjs",
   config: {
-    'iceServers': [
-      { url: 'stun:stun01.sipphone.com' },
-      { url: 'stun:stun.ekiga.net' },
-      { url: 'stun:stunserver.org' },
-      { url: 'stun:stun.softjoys.com' },
-      { url: 'stun:stun.voiparound.com' },
-      { url: 'stun:stun.voipbuster.com' },
-      { url: 'stun:stun.voipstunt.com' },
-      { url: 'stun:stun.voxgratia.org' },
-      { url: 'stun:stun.xten.com' },
+    iceServers: [
+      { url: "stun:stun01.sipphone.com" },
+      { url: "stun:stun.ekiga.net" },
+      { url: "stun:stunserver.org" },
+      { url: "stun:stun.softjoys.com" },
+      { url: "stun:stun.voiparound.com" },
+      { url: "stun:stun.voipbuster.com" },
+      { url: "stun:stun.voipstunt.com" },
+      { url: "stun:stun.voxgratia.org" },
+      { url: "stun:stun.xten.com" },
       {
-        url: 'turn:192.158.29.39:3478?transport=udp',
-        credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-        username: '28224511:1379330808'
+        url: "turn:192.158.29.39:3478?transport=udp",
+        credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=",
+        username: "28224511:1379330808",
       },
       {
-        url: 'turn:192.158.29.39:3478?transport=tcp',
-        credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-        username: '28224511:1379330808'
-      }
-    ]
+        url: "turn:192.158.29.39:3478?transport=tcp",
+        credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=",
+        username: "28224511:1379330808",
+      },
+    ],
   },
 
-  debug: 3
+  debug: 3,
 });
 
-
 // let user;
-// const getUserValue = () => {
-//   return new Promise((resolve, reject) => {
-//     form.addEventListener('submit', (e) => {
-//       e.preventDefault();
-//       const user = document.getElementById('input').value;
-//       resolve(user);
-//     });
-//   });
-// };
+// function showCustomPrompt() {
+//   document.getElementById("custom-prompt").style.display = "flex";
+//   document.getElementById("prompt-input").focus();
+// }
 
-// getUserValue()
-//   .then(user => {
-//     info.style.display = "none";
-//     body1.style.display = "block";
-//     console.log("user value", user);
-//   })
-//   .catch(error => {
-//     console.error("Error getting user value:", error);
-//   });
+// document.addEventListener("DOMContentLoaded", () => {
+//   document.getElementById("prompt-btn").onclick = () => {
+//     user = document.getElementById("prompt-input").value.trim();
+//     if (user) {
+//       document.getElementById("custom-prompt").style.display = "none";
+//       console.log("User name:", user);
+//     }
+//   };
 
-  // alert("user value" , user)
+//   document.getElementById("prompt-input").onkeypress = (e) => {
+//     if (e.key === "Enter") document.getElementById("prompt-btn").click();
+//   };
 
-  console.log("Rankush")
-  console.log("console user value ",user)
-
-  // alert("user")
-
+//   showCustomPrompt();
+// });
 
 let myVideoStream;
 navigator.mediaDevices
@@ -122,7 +91,7 @@ navigator.mediaDevices
     addVideoStream(myVideo, stream);
 
     peer.on("call", (call) => {
-      console.log('someone call me');
+      console.log("someone call me");
       call.answer(stream);
       const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
@@ -135,42 +104,41 @@ navigator.mediaDevices
     });
   });
 
-  window.onbeforeunload = 
-  function (event) {
-    event.returnValue = 
-    "This document is ready to load";
-    socket.emit('user-disconnected' , userName)
-  };
+window.onbeforeunload = function (event) {
+  event.returnValue = "This document is ready to load";
+  socket.emit("user-disconnected", userName);
+};
 
 const connectToNewUser = (userId, stream) => {
-  console.log('I call someone' + userId);
+  console.log("I call someone" + userId);
   const call = peer.call(userId, stream);
   const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
     addVideoStream(video, userVideoStream);
   });
 
-  call.on("close" , () => {
-    video.remove()
-  })
+  call.on("close", () => {
+    video.remove();
+  });
 };
 
-socket.on('user-disconnected' , (userId) => {
-  console.log("disconnect user id : " , userId)
-  alert('user disconnected : ',userId)
+socket.on("user-disconnected", (userId) => {
+  console.log("disconnect user id : ", userId);
+  alert("user disconnected : ", userId);
 
-  const videos = document.querySelectorAll('video');
-  
-  videos.forEach(video => {
-    console.log(video.id)
-  if(video.id===userId){
-  video.remove();
-  }
-  })
-  })
+  const videos = document.querySelectorAll("video");
 
+  videos.forEach((video) => {
+    console.log(video.id);
+    if (video.id === userId) {
+      video.remove();
+    }
+  });
+});
+
+console.log("username1 : ", user);
 peer.on("open", (id) => {
-  console.log('my id is' + id);
+  console.log("my id is" + id);
   socket.emit("join-room", ROOM_ID, id, user);
 });
 
@@ -180,11 +148,7 @@ const addVideoStream = (video, stream) => {
     video.play();
     videoGrid.append(video);
   });
-
-
 };
-
-
 
 let text = document.querySelector("#chat_message");
 let send = document.getElementById("send");
@@ -238,34 +202,34 @@ stopVideo.addEventListener("click", () => {
 });
 
 inviteButton.addEventListener("click", (e) => {
-  prompt(
-    "Share this link to your friend : ",
-    window.location.href
-  );
+  prompt("Share this link to your friend : ", window.location.href);
 });
 
 socket.on("createMessage", (message, userName) => {
+  console.log("createMessage : ", userName);
+
   messages.innerHTML =
     messages.innerHTML +
     `<div class="message">
-        <b><i class="far fa-user-circle"></i> <span> ${userName === user ? "me" : userName
-    }</span> </b>
+        <b><i class="far fa-user-circle"></i> <span> ${
+          userName == user ? "me" : userName
+        }</span> </b>
         <span>${message} <br> <i>${new Date().toLocaleTimeString()}</i></span>
       
     </div>`;
+
+  console.log("username", userName);
+  console.log("user", user);
 });
 
-
-
-let chunks = []
+let chunks = [];
 function startRecording() {
-document.getElementById('startRecording').style.display="none"
-document.getElementById('stopRecording').style.display="flex"
+  document.getElementById("startRecording").style.display = "none";
+  document.getElementById("stopRecording").style.display = "flex";
 
-  // pauseBtn.style.display = "block"
-  // resumeBtn.style.display = "block"
-  // recordBtn.style.display = "none"
-  mediaRecorder = new MediaRecorder(myVideoStream, { mimeType: 'video/webm; codecs=vp8,opus' });
+  mediaRecorder = new MediaRecorder(myVideoStream, {
+    mimeType: "video/webm; codecs=vp8,opus",
+  });
   mediaRecorder.ondataavailable = (e) => {
     if (e.data.size > 0) {
       console.log(e.data);
@@ -277,17 +241,9 @@ document.getElementById('stopRecording').style.display="flex"
 }
 
 function stopRecording() {
-  document.getElementById('stopRecording').style.display="none"
-document.getElementById('startRecording').style.display="flex"
-
-  // pauseBtn.style.display = "none"
-  // resumeBtn.style.display = "none"
-  // startBtn.style.display = "block"
-
-
-  // alert("stopped recording");
+  document.getElementById("stopRecording").style.display = "none";
+  document.getElementById("startRecording").style.display = "flex";
   mediaRecorder.stop();
-  // videoElement.style.display = "none"
 }
 
 function setListeners() {
@@ -300,19 +256,18 @@ function handleOnStop() {
 }
 
 function saveFile() {
-  const blob = new Blob(chunks, { type: 'video/webm' });
+  const blob = new Blob(chunks, { type: "video/webm" });
   const blobUrl = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.style.display = 'none';
+  const link = document.createElement("a");
+  link.style.display = "none";
   link.href = blobUrl;
-  link.download = 'recorded_file.webm';
+  link.download = "recorded_file.webm";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
   window.URL.revokeObjectURL(blobUrl);
   chunks = [];
 }
-
 
 const screenShareButton = document.querySelector("#screenShareButton");
 
@@ -322,35 +277,25 @@ screenShareButton.addEventListener("click", () => {
 
 async function startScreenSharing() {
   try {
-    // Get a stream of the user's screen
-    const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    const screenStream = await navigator.mediaDevices.getDisplayMedia({
+      video: true,
+    });
 
     // Replace the video track in the local stream with the screen stream track
     const screenTrack = screenStream.getVideoTracks()[0];
-    const senders = peer.connections[peer.id].connection.peerConnection.getSenders();
-    senders.forEach(sender => {
-      if (sender.track.kind === 'video') {
+    const senders =
+      peer.connections[peer.id].connection.peerConnection.getSenders();
+    senders.forEach((sender) => {
+      if (sender.track.kind === "video") {
         sender.replaceTrack(screenTrack);
       }
     });
 
-    // Stop the previous video stream and replace it with the screen stream
-    myVideoStream.getVideoTracks().forEach(track => track.stop());
+    myVideoStream.getVideoTracks().forEach((track) => track.stop());
     myVideoStream.removeTrack(myVideoStream.getVideoTracks()[0]);
     myVideoStream.addTrack(screenTrack);
-
-    // Update the local video element with the screen stream
     myVideo.srcObject = myVideoStream;
-
-    // Update UI to indicate screen sharing is active
-    // You can add code here to toggle buttons or display a message
   } catch (error) {
-    console.error('Error sharing screen:', error);
+    console.error("Error sharing screen:", error);
   }
 }
-
-
-
-
-// }
-

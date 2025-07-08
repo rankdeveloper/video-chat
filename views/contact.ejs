@@ -15,12 +15,15 @@
       .contact {
         display: flex;
         padding: 2rem 0;
-
         align-items: center;
       }
 
       .contact .img {
         width: 50%;
+
+        @media screen and (max-width: 400px) {
+          display: none;
+        }
       }
 
       .img img {
@@ -33,6 +36,9 @@
       .form {
         width: 50%;
         padding: 0 2rem;
+        @media screen and (max-width: 400px) {
+          width: 100%;
+        }
       }
 
       .form h2 {
@@ -40,6 +46,9 @@
         margin-bottom: 4rem;
         color: white;
         font-size: 2.5rem;
+        @media screen and (max-width: 400px) {
+          font-size: 2rem;
+        }
       }
 
       form > label {
@@ -78,28 +87,38 @@
         border: none;
         border-bottom: 2px solid #7280d8;
       }
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
     </style>
   </head>
 
   <body>
     <div class="logo">
-      <h3>
-        hola<span
-          style="
-            padding-top: 1rem;
-            font-size: 3rem;
-            color: #7280d8;
-            margin-left: 5px;
-          "
-          >Amigo</span
-        >
-      </h3>
+      <h3>hola<span style="color: #7280d8">AMIGO</span></h3>
 
-      <nav>
-        <a href="/">Home</a>
+      <nav class="desktop-nav">
         <a href="/room">Convo</a>
         <a href="/about">About us</a>
+        <a href="/contact">Feedback</a>
       </nav>
+
+      <div class="mobile-menu">
+        <div class="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+          <a href="/room">Convo</a>
+          <a href="/about">About us</a>
+          <a href="/contact">Feedback</a>
+        </nav>
+      </div>
     </div>
 
     <div class="contact">
@@ -176,6 +195,13 @@
             console.error("Error adding document: ", error);
             alert("An error occurred. Please try again later.");
           });
+      }
+    </script>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("mobileNav").classList.toggle("active");
+        document.querySelector(".hamburger").classList.toggle("active");
       }
     </script>
   </body>
