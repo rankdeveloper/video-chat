@@ -25,8 +25,37 @@ const input = document.getElementById("input");
 const info = document.getElementById("info");
 const body1 = document.getElementById("body");
 
-let user = prompt("Enter your name : ");
+// let user = prompt("Enter your name : ");
 
+let user = "";
+
+window.addEventListener("DOMContentLoaded", () => {
+  const nameModal = document.getElementById("nameModal");
+  const nameInput = document.getElementById("customNameInput");
+  const nameSubmit = document.getElementById("customNameSubmit");
+
+  function submitName() {
+    const value = nameInput.value.trim();
+    if (value) {
+      user = value;
+      nameModal.style.display = "none";
+      // Enable chat
+      document.getElementById("chat_message").disabled = false;
+      document.getElementById("send").disabled = false;
+      // Now emit join-room here, after user is set!
+      peer.on("open", (id) => {
+        socket.emit("join-room", ROOM_ID, id, user);
+      });
+    } else {
+      nameInput.focus();
+    }
+  }
+
+  nameSubmit.addEventListener("click", submitName);
+  nameInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") submitName();
+  });
+});
 var peer = new Peer({
   host: "localhost",
   port: 3030,
@@ -57,28 +86,6 @@ var peer = new Peer({
 
   debug: 3,
 });
-
-// let user;
-// function showCustomPrompt() {
-//   document.getElementById("custom-prompt").style.display = "flex";
-//   document.getElementById("prompt-input").focus();
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   document.getElementById("prompt-btn").onclick = () => {
-//     user = document.getElementById("prompt-input").value.trim();
-//     if (user) {
-//       document.getElementById("custom-prompt").style.display = "none";
-//       console.log("User name:", user);
-//     }
-//   };
-
-//   document.getElementById("prompt-input").onkeypress = (e) => {
-//     if (e.key === "Enter") document.getElementById("prompt-btn").click();
-//   };
-
-//   showCustomPrompt();
-// });
 
 let myVideoStream;
 navigator.mediaDevices
@@ -136,11 +143,11 @@ socket.on("user-disconnected", (userId) => {
   });
 });
 
-console.log("username1 : ", user);
-peer.on("open", (id) => {
-  console.log("my id is" + id);
-  socket.emit("join-room", ROOM_ID, id, user);
-});
+// console.log("username1 : ", user);
+// peer.on("open", (id) => {
+//   console.log("my id is" + id);
+//   socket.emit("join-room", ROOM_ID, id, user);
+// });
 
 const addVideoStream = (video, stream) => {
   video.srcObject = stream;

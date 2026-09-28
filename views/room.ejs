@@ -196,6 +196,42 @@
         <button id="prompt-btn">Continue</button>
       </div>
     </div>
+
+    <div
+      id="nameModal"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          padding: 30px 40px;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px #0003;
+          text-align: center;
+        "
+      >
+        <h2>Enter your name</h2>
+        <input
+          type="text"
+          id="customNameInput"
+          placeholder="Your name"
+          style="padding: 8px; width: 80%; margin-bottom: 10px"
+        />
+        <br />
+        <button id="customNameSubmit" style="padding: 8px 20px">Join</button>
+      </div>
+    </div>
   </body>
   <script>
     function toggleMenu() {
