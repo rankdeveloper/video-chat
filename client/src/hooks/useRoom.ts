@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Peer, { MediaConnection } from "peerjs";
 import { io, Socket } from "socket.io-client";
-import type { ChatMessage, ClientToServerEvents, ServerToClientEvents } from "../types";
+import type {
+  ChatMessage,
+  ClientToServerEvents,
+  ServerToClientEvents,
+} from "../types";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3030";
 const iceServers: RTCIceServer[] = [{ urls: "stun:stun.l.google.com:19302" }];
 if (import.meta.env.VITE_TURN_URL) {
   iceServers.push({
@@ -23,7 +28,10 @@ export function useRoom(roomId: string, userName: string | null) {
   const [recording, setRecording] = useState(false);
   const [error, setError] = useState("");
 
-  const socketRef = useRef<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null);
+  const socketRef = useRef<Socket<
+    ServerToClientEvents,
+    ClientToServerEvents
+  > | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const callsRef = useRef(new Map<string, MediaConnection>());
   const recorderRef = useRef<MediaRecorder | null>(null);
@@ -32,17 +40,28 @@ export function useRoom(roomId: string, userName: string | null) {
     if (!userName) return;
     let cancelled = false;
     const calls = callsRef.current;
-    const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
+    // const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io();
+    const socket: Socket<ServerToClientEvents, ClientToServerEvents> =
+      io(API_URL);
+    // const peer = new Peer({
+    //   host: location.hostname,
+    //   port: Number(location.port) || (secure ? 443 : 80),
+    //   path: "/peerjs",
+    //   secure,
+    //   config: { iceServers },
+    // });
+
     const peer = new Peer({
-      host: location.hostname,
-      port: Number(location.port) || (secure ? 443 : 80),
+      host: new URL(API_URL).hostname,
+      port: new URL(API_URL).protocol === "https:" ? 443 : 80,
       path: "/peerjs",
-      secure,
+      secure: new URL(API_URL).protocol === "https:",
       config: { iceServers },
     });
     socketRef.current = socket;
 
-    const addRemote = (id: string, s: MediaStream) => setRemote((r) => ({ ...r, [id]: s }));
+    const addRemote = (id: string, s: MediaStream) =>
+      setRemote((r) => ({ ...r, [id]: s }));
     const removeRemote = (id: string) => {
       calls.delete(id);
       setRemote(({ [id]: _gone, ...rest }) => rest);
@@ -72,11 +91,14 @@ export function useRoom(roomId: string, userName: string | null) {
         });
         socket.on("user-connected", (id) => track(peer.call(id, stream)));
 
-        const join = (id: string) => socket.emit("join-room", roomId, id, userName);
+        const join = (id: string) =>
+          socket.emit("join-room", roomId, id, userName);
         if (peer.open && peer.id) join(peer.id);
         else peer.once("open", join);
       })
-      .catch(() => setError("Camera and microphone access is required to join the call."));
+      .catch(() =>
+        setError("Camera and microphone access is required to join the call."),
+      );
 
     return () => {
       cancelled = true;
@@ -106,14 +128,19 @@ export function useRoom(roomId: string, userName: string | null) {
 
   const swapVideoTrack = (t: MediaStreamTrack) =>
     callsRef.current.forEach((c) =>
-      c.peerConnection.getSenders().find((s) => s.track?.kind === "video")?.replaceTrack(t)
+      c.peerConnection
+        .getSenders()
+        .find((s) => s.track?.kind === "video")
+        ?.replaceTrack(t),
     );
 
   const shareScreen = async () => {
     const cam = streamRef.current;
     if (!cam || sharing) return;
     try {
-      const screen = await navigator.mediaDevices.getDisplayMedia({ video: true });
+      const screen = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+      });
       const screenTrack = screen.getVideoTracks()[0];
       swapVideoTrack(screenTrack);
       setLocal(new MediaStream([screenTrack, ...cam.getAudioTracks()]));
@@ -129,14 +156,18 @@ export function useRoom(roomId: string, userName: string | null) {
   };
 
   const toggleRecording = () => {
-    if (recorderRef.current?.state === "recording") return recorderRef.current.stop();
+    if (recorderRef.current?.state === "recording")
+      return recorderRef.current.stop();
     if (!streamRef.current) return;
     const chunks: Blob[] = [];
     const rec = new MediaRecorder(streamRef.current);
     rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
     rec.onstop = () => {
       const url = URL.createObjectURL(new Blob(chunks, { type: rec.mimeType }));
-      const a = Object.assign(document.createElement("a"), { href: url, download: "recorded_file.webm" });
+      const a = Object.assign(document.createElement("a"), {
+        href: url,
+        download: "recorded_file.webm",
+      });
       a.click();
       URL.revokeObjectURL(url);
       setRecording(false);
@@ -146,5 +177,19 @@ export function useRoom(roomId: string, userName: string | null) {
     setRecording(true);
   };
 
-  return { local, remote, messages, micOn, camOn, sharing, recording, error, sendMessage, toggleMic, toggleCam, shareScreen, toggleRecording };
+  return {
+    local,
+    remote,
+    messages,
+    micOn,
+    camOn,
+    sharing,
+    recording,
+    error,
+    sendMessage,
+    toggleMic,
+    toggleCam,
+    shareScreen,
+    toggleRecording,
+  };
 }
