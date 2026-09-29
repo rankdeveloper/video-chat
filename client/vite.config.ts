@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-const api = "http://localhost:3030";
+const api = import.meta.env.VITE_API_URL || "http://localhost:3030";
 
 export default defineConfig({
   plugins: [react()],
