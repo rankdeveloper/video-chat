@@ -93,7 +93,7 @@ export default function Room() {
   const { roomId = "" } = useParams();
   const [name, setName] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
-  const [chatOpen, setChatOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
   const room = useRoom(roomId, name);
 
   const join = () => draft.trim() && setName(draft.trim());
