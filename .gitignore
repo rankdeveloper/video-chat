@@ -3,3 +3,4 @@ Blog.md
 *.zip
 
 .env
+.env.*

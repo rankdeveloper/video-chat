@@ -8,7 +8,7 @@ import { feedbackRouter } from "./routes/feedback";
 
 export function createApp(server: http.Server) {
   const app = express();
-  app.use(cors({ origin: env.clientOrigin }));
+  app.use(cors({ origin: env.clientOrigins }));
   app.use(express.json({ limit: "20kb" }));
 
   app.use("/peerjs", ExpressPeerServer(server, { path: "/" }));
