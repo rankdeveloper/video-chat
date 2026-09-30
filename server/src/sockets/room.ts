@@ -3,8 +3,16 @@ import { Server } from "socket.io";
 import type { ClientToServerEvents, ServerToClientEvents } from "../types";
 
 export function attachSockets(server: http.Server, origins: string[]) {
+  // const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
+  //   cors: { origin: origins },
+  // });
+
   const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
-    cors: { origin: origins },
+    cors: {
+      origin: origins,
+      methods: ["GET", "POST"],
+      credentials: true,
+    },
   });
 
   io.on("connection", (socket) => {

@@ -6,12 +6,16 @@ import { attachSockets } from "./sockets/room";
 
 async function main() {
   await mongoose.connect(env.mongoUri);
+
   const server = http.createServer();
+
   server.on("request", createApp(server));
+
   attachSockets(server, env.clientOrigins);
-  server.listen(env.port, () =>
-    console.log(`Server on http://localhost:${env.port}`),
-  );
+
+  server.listen(env.port, "0.0.0.0", () => {
+    console.log(`Server running on port ${env.port}`);
+  });
 }
 
 main().catch((err) => {
