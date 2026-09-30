@@ -53,7 +53,7 @@ export function useRoom(roomId: string, userName: string | null) {
 
     const peer = new Peer({
       host: new URL(API_URL).hostname,
-      port: new URL(API_URL).protocol === "https:" ? 443 : 80,
+      port: Number(new URL(API_URL).port) || (new URL(API_URL).protocol === "https:" ? 443 : 80),
       path: "/peerjs",
       secure: new URL(API_URL).protocol === "https:",
       config: { iceServers },

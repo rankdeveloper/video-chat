@@ -1,13 +1,3 @@
-// import { useEffect, useRef } from "react";
-
-// export default function Video({ stream, muted = false }: { stream: MediaStream; muted?: boolean }) {
-//   const ref = useRef<HTMLVideoElement>(null);
-//   useEffect(() => {
-//     if (ref.current) ref.current.srcObject = stream;
-//   }, [stream]);
-//   return <video ref={ref} autoPlay playsInline muted={muted} />;
-// }
-
 import { useEffect, useRef } from "react";
 
 type VideoProps = {
@@ -17,24 +7,17 @@ type VideoProps = {
   label?: string;
 };
 
-export default function Video({
-  stream,
-  muted = false,
-  local = false,
-  label,
-}: VideoProps) {
+export default function Video({ stream, muted = false, local = false, label }: VideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.srcObject = stream;
-    }
+    if (ref.current) ref.current.srcObject = stream;
   }, [stream]);
 
   return (
-    <div>
+    <div className={`video-tile ${local ? "video-tile--local" : ""}`}>
       <video ref={ref} autoPlay playsInline muted={muted} />
-      {label && <span>{label}</span>}
+      {label && <span className="video-tile__label">{label}</span>}
     </div>
   );
 }

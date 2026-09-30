@@ -41,9 +41,9 @@ export default function Home() {
             Talk face to face, wherever you both are.
           </h1>
           <p className="hero__text">
-            Hola Amigo is a video room you can open in one tap — camera, chat
-            and screen share, no download needed. Start a call and send the link
-            to bring someone in.
+            NextFace is a video room you can open in one tap — camera, chat and
+            screen share, no download needed. Start a call and send the link to
+            bring someone in.
           </p>
           <div className="hero__actions">
             <Link to="/room">

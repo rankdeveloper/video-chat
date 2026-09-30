@@ -50,6 +50,7 @@
 // }
 
 import { FormEvent, useState } from "react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
 
 const empty = { userName: "", emailId: "", message: "" };
@@ -122,14 +123,12 @@ export default function Contact() {
 
           {status === "ok" && (
             <p className="form-status form-status--ok">
-              <i className="fas fa-check-circle" /> Thanks — your message is on
-              its way.
+              <CheckCircle size={16} /> Thanks — your message is on its way.
             </p>
           )}
           {status === "error" && (
             <p className="form-status form-status--error">
-              <i className="fas fa-exclamation-circle" /> Something went wrong.
-              Please try again.
+              <AlertCircle size={16} /> Something went wrong. Please try again.
             </p>
           )}
         </div>
