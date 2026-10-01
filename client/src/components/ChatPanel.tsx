@@ -15,10 +15,9 @@ export default function ChatPanel({ messages, userName, onSend, open, onClose }:
   const [text, setText] = useState("");
   const endRef = useRef<HTMLDivElement>(null);
 
-  useEffect(
-    () => endRef.current?.scrollIntoView({ behavior: "smooth" }),
-    [messages],
-  );
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const send = () => {
     if (!text.trim()) return;

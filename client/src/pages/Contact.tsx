@@ -1,63 +1,15 @@
-// import { FormEvent, useState } from "react";
-// import Navbar from "../components/Navbar";
-
-// const empty = { userName: "", emailId: "", message: "" };
-
-// export default function Contact() {
-//   const [form, setForm] = useState(empty);
-//   const [status, setStatus] = useState("");
-
-//   const set = (k: keyof typeof empty) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-//     setForm({ ...form, [k]: e.target.value });
-
-//   async function submit(e: FormEvent) {
-//     e.preventDefault();
-//     try {
-//       const res = await fetch("/api/feedback", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(form),
-//       });
-//       if (!res.ok) throw new Error();
-//       setForm(empty);
-//       setStatus("Thank you for your message!");
-//     } catch {
-//       setStatus("An error occurred. Please try again later.");
-//     }
-//   }
-
-//   return (
-//     <div className="body page-contact">
-//       <Navbar />
-//       <div className="contact">
-//         <div className="img"><img src="/img/text_chat.png" alt="" /></div>
-//         <div className="form">
-//           <h2>We'd love to hear from you!</h2>
-//           <form onSubmit={submit}>
-//             <label htmlFor="username">Your name</label>
-//             <input id="username" value={form.userName} onChange={set("userName")} required />
-//             <label htmlFor="email">Email Id</label>
-//             <input id="email" type="email" value={form.emailId} onChange={set("emailId")} required />
-//             <label htmlFor="message">Message</label>
-//             <textarea id="message" value={form.message} onChange={set("message")} required />
-//             <button type="submit">Send</button>
-//           </form>
-//           {status && <p className="form-status">{status}</p>}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 import { FormEvent, useState } from "react";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import { useAnimations } from "../hooks/useAnimations";
 
 const empty = { userName: "", emailId: "", message: "" };
 
 export default function Contact() {
   const [form, setForm] = useState(empty);
   const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
+  const { slideInLeft, slideInRight } = useAnimations();
 
   const set =
     (k: keyof typeof empty) =>
@@ -84,41 +36,23 @@ export default function Contact() {
     <div className="page page-contact">
       <Navbar />
       <div className="contact">
-        <div className="contact__visual">
+        <motion.div className="contact__visual" {...slideInLeft()}>
           <img src="/img/text_chat.png" alt="" />
-        </div>
+        </motion.div>
 
-        <div className="contact__form">
+        <motion.div className="contact__form" {...slideInRight(0.1)}>
           <h2>We'd love to hear from you</h2>
           <form onSubmit={submit}>
             <label htmlFor="username">Your name</label>
-            <input
-              id="username"
-              value={form.userName}
-              onChange={set("userName")}
-              required
-            />
+            <input id="username" value={form.userName} onChange={set("userName")} required />
 
             <label htmlFor="email">Email address</label>
-            <input
-              id="email"
-              type="email"
-              value={form.emailId}
-              onChange={set("emailId")}
-              required
-            />
+            <input id="email" type="email" value={form.emailId} onChange={set("emailId")} required />
 
             <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              value={form.message}
-              onChange={set("message")}
-              required
-            />
+            <textarea id="message" value={form.message} onChange={set("message")} required />
 
-            <button type="submit" className="btn btn--primary">
-              Send message
-            </button>
+            <button type="submit" className="btn btn--primary">Send message</button>
           </form>
 
           {status === "ok" && (
@@ -131,7 +65,7 @@ export default function Contact() {
               <AlertCircle size={16} /> Something went wrong. Please try again.
             </p>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

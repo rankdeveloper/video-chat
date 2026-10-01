@@ -1,8 +1,5 @@
-/* ================= Home ================= */
-
 .page-home {
   background: var(--ink-950);
-  overflow: hidden;
 }
 
 .hero {
@@ -121,8 +118,6 @@
   }
 }
 
-/* ================= About ================= */
-
 .page-about {
   background: var(--ink-950);
   color: var(--text-0);
@@ -143,7 +138,11 @@
   transform: translateX(-50%);
   width: 600px;
   height: 400px;
-  background: radial-gradient(ellipse, rgba(106, 92, 255, 0.2), transparent 70%);
+  background: radial-gradient(
+    ellipse,
+    rgba(106, 92, 255, 0.2),
+    transparent 70%
+  );
   pointer-events: none;
   filter: blur(8px);
 }
@@ -167,7 +166,9 @@
   margin: 0 auto 1.25rem;
 }
 
-.about-hero__title span { color: var(--coral); }
+.about-hero__title span {
+  color: var(--coral);
+}
 
 .about-hero__sub {
   color: var(--text-1);
@@ -198,7 +199,9 @@
   border-right: 1px solid var(--line);
 }
 
-.about-stat:last-child { border-right: none; }
+.about-stat:last-child {
+  border-right: none;
+}
 
 .about-stat__value {
   font-family: var(--font-display);
@@ -239,7 +242,9 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 1.5rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .about-card:hover {
@@ -340,7 +345,9 @@
   justify-content: center;
   color: var(--text-1);
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .about-dev__links a:hover {
@@ -354,8 +361,12 @@
     text-align: center;
     padding: 1.75rem 1.5rem;
   }
-  .about-dev__links { justify-content: center; }
-  .about-stat { min-width: 80px; }
+  .about-dev__links {
+    justify-content: center;
+  }
+  .about-stat {
+    min-width: 80px;
+  }
 }
 
 /* ================= Contact ================= */

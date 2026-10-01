@@ -1,46 +1,15 @@
-import {
-  Video,
-  MessageSquare,
-  Monitor,
-  Download,
-  Zap,
-  Shield,
-  GitBranch,
-  Globe,
-} from "lucide-react";
+import { Video, MessageSquare, Monitor, Download, Zap, Shield, GitBranch, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import { useAnimations } from "../hooks/useAnimations";
 
 const features = [
-  {
-    icon: <Video size={22} />,
-    title: "HD Video Calls",
-    desc: "Crystal-clear video powered by WebRTC — no plugins, no downloads.",
-  },
-  {
-    icon: <MessageSquare size={22} />,
-    title: "Live Chat",
-    desc: "Send messages during a call without interrupting the conversation.",
-  },
-  {
-    icon: <Monitor size={22} />,
-    title: "Screen Share",
-    desc: "Share your entire screen or a single window with one click.",
-  },
-  {
-    icon: <Download size={22} />,
-    title: "Record & Download",
-    desc: "Record your session locally and download it as a .webm file.",
-  },
-  {
-    icon: <Zap size={22} />,
-    title: "Instant Rooms",
-    desc: "Create a room in seconds and share the link — no sign-up needed.",
-  },
-  {
-    icon: <Shield size={22} />,
-    title: "Peer-to-Peer",
-    desc: "Media streams go directly between browsers, never through a server.",
-  },
+  { icon: <Video size={22} />, title: "HD Video Calls", desc: "Crystal-clear video powered by WebRTC — no plugins, no downloads." },
+  { icon: <MessageSquare size={22} />, title: "Live Chat", desc: "Send messages during a call without interrupting the conversation." },
+  { icon: <Monitor size={22} />, title: "Screen Share", desc: "Share your entire screen or a single window with one click." },
+  { icon: <Download size={22} />, title: "Record & Download", desc: "Record your session locally and download it as a .webm file." },
+  { icon: <Zap size={22} />, title: "Instant Rooms", desc: "Create a room in seconds and share the link — no sign-up needed." },
+  { icon: <Shield size={22} />, title: "Peer-to-Peer", desc: "Media streams go directly between browsers, never through a server." },
 ];
 
 const stats = [
@@ -51,50 +20,48 @@ const stats = [
 ];
 
 export default function About() {
+  const { fadeUp, stagger, cardVariant } = useAnimations();
+
   return (
     <div className="page page-about">
       <Navbar />
 
-      {/* Hero */}
       <section className="about-hero">
         <div className="about-hero__glow" />
-        <p className="about-hero__eyebrow">About the project</p>
-        <h1 className="about-hero__title">
+        <motion.p className="about-hero__eyebrow" {...fadeUp(0)}>About the project</motion.p>
+        <motion.h1 className="about-hero__title" {...fadeUp(0.1)}>
           Video calls that just <span>work</span>.
-        </h1>
-        <p className="about-hero__sub">
+        </motion.h1>
+        <motion.p className="about-hero__sub" {...fadeUp(0.2)}>
           NextFace is a browser-based video chat app — open a room, share the
           link, and you're talking. No accounts, no installs, no friction.
-        </p>
+        </motion.p>
       </section>
 
-      {/* Stats */}
-      <div className="about-stats">
+      <motion.div className="about-stats" variants={stagger} initial="initial" animate="animate">
         {stats.map((s) => (
-          <div className="about-stat" key={s.label}>
+          <motion.div className="about-stat" key={s.label} variants={cardVariant}>
             <span className="about-stat__value">{s.value}</span>
             <span className="about-stat__label">{s.label}</span>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Features */}
       <section className="about-features">
-        <h2 className="about-section-title">Everything you need</h2>
-        <div className="about-grid">
+        <motion.h2 className="about-section-title" {...fadeUp(0)}>Everything you need</motion.h2>
+        <motion.div className="about-grid" variants={stagger} initial="initial" animate="animate">
           {features.map((f) => (
-            <div className="about-card" key={f.title}>
+            <motion.div className="about-card" key={f.title} variants={cardVariant}>
               <div className="about-card__icon">{f.icon}</div>
               <h3>{f.title}</h3>
               <p>{f.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
-      {/* Developer */}
       <section className="about-dev">
-        <div className="about-dev__card">
+        <motion.div className="about-dev__card" {...fadeUp(0.1)}>
           <div className="about-dev__avatar">R</div>
           <div className="about-dev__info">
             <p className="about-dev__role">Built by</p>
@@ -104,12 +71,7 @@ export default function About() {
               building tools that feel effortless to use.
             </p>
             <div className="about-dev__links">
-              <a
-                href="https://github.com/rankdeveloper"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-              >
+              <a href="https://github.com/rankdeveloper" target="_blank" rel="noreferrer" aria-label="GitHub">
                 <GitBranch size={18} />
               </a>
               <a href="#" aria-label="Website">
@@ -117,7 +79,7 @@ export default function About() {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

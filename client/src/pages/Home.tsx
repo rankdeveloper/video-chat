@@ -1,76 +1,43 @@
-// import { Link } from "react-router-dom";
-// import Navbar from "../components/Navbar";
-
-// export default function Home() {
-//   return (
-//     <div className="body page-home">
-//       <Navbar />
-//       <div className="home-main">
-//         <div className="left">
-//           <h2>Step into <span className="text-h">Hola Amigo</span></h2>
-//           <p>
-//             where every 'Hola' opens doors to seamless video connections. Effortlessly catch up with
-//             loved ones worldwide with our crisp, reliable video calls. Join our community for immersive
-//             conversations that bridge any distance. Start chatting today and feel the warmth of friendship!
-//           </p>
-//           <Link to="/room"><button className="start">Start Convo</button></Link>
-//         </div>
-//         <div className="right">
-//           <div className="cards">
-//             <div className="one"><img src="/img/text_chat.png" alt="chat" /></div>
-//             <div className="row">
-//               <div className="one"><img src="/img/video_chat.png" alt="video-chat" /></div>
-//               <div className="one"><img src="/img/screenshare.png" alt="screenshare" /></div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import { useAnimations } from "../hooks/useAnimations";
 
 export default function Home() {
+  const { fadeUp, scaleIn } = useAnimations();
+
   return (
     <div className="page page-home">
       <Navbar />
       <section className="hero">
         <div className="hero__copy">
-          <h1 className="hero__title">
+          <motion.h1 className="hero__title" {...fadeUp(0)}>
             Talk face to face, wherever you both are.
-          </h1>
-          <p className="hero__text">
+          </motion.h1>
+          <motion.p className="hero__text" {...fadeUp(0.12)}>
             NextFace is a video room you can open in one tap — camera, chat and
             screen share, no download needed. Start a call and send the link to
             bring someone in.
-          </p>
-          <div className="hero__actions">
+          </motion.p>
+          <motion.div className="hero__actions" {...fadeUp(0.22)}>
             <Link to="/room">
               <button className="btn btn--primary">Start a conversation</button>
             </Link>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="hero__visual">
+        <motion.div
+          className="hero__visual"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.65, ease: "easeOut", delay: 0.1 }}
+        >
           <div className="collage">
-            <img
-              className="collage__item collage__item--a"
-              src="/img/video_chat.png"
-              alt="Video call preview"
-            />
-            <img
-              className="collage__item collage__item--b"
-              src="/img/text_chat.png"
-              alt="Text chat preview"
-            />
-            <img
-              className="collage__item collage__item--c"
-              src="/img/screenshare.png"
-              alt="Screen share preview"
-            />
+            <img className="collage__item collage__item--a" src="/img/video_chat.png" alt="Video call preview" />
+            <img className="collage__item collage__item--b" src="/img/text_chat.png" alt="Text chat preview" />
+            <img className="collage__item collage__item--c" src="/img/screenshare.png" alt="Screen share preview" />
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

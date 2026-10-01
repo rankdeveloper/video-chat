@@ -75,8 +75,6 @@ a {
   flex-direction: column;
 }
 
-/* ---------- Buttons ---------- */
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -113,16 +111,17 @@ a {
   box-shadow: 0 6px 24px -4px rgba(255, 107, 74, 0.6);
 }
 
-/* ---------- Nav ---------- */
-
 .logo {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem clamp(1.25rem, 4vw, 2.5rem);
   padding-top: calc(1.25rem + var(--safe-top));
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
+  background: var(--ink-950);
+  backdrop-filter: blur(12px);
 }
 
 .logo h3 {
@@ -302,8 +301,6 @@ nav.desktop-nav a:hover {
   font-weight: 500;
   letter-spacing: 0.01em;
 }
-
-/* ---------- Dock ---------- */
 
 .dock {
   flex-shrink: 0;
@@ -650,8 +647,6 @@ nav.desktop-nav a:hover {
   }
 }
 
-/* ---------- Name modal ---------- */
-
 .name-modal {
   position: fixed;
   inset: 0;
@@ -724,4 +719,19 @@ nav.desktop-nav a:hover {
 
 .name-modal__card .btn {
   width: 100%;
+}
+
+html {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+
+    background-color: var(--ink-900);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--coral-600);
+    border-radius: 5px;
+  }
 }

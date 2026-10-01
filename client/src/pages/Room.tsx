@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAnimations } from "../hooks/useAnimations";
 import { useParams } from "react-router-dom";
 import {
   Video as VideoIcon,
@@ -23,6 +25,7 @@ export default function Room() {
   const [chatOpen, setChatOpen] = useState(false);
   const [unread, setUnread] = useState(0);
   const room = useRoom(roomId, name);
+  const { fadeIn, scaleIn } = useAnimations();
 
   useEffect(() => {
     if (!chatOpen && room.messages.length > 0) {
@@ -112,25 +115,27 @@ export default function Room() {
         />
       </div>
 
-      {!name && (
-        <div className="name-modal">
-          <div className="name-modal__card">
-            <div className="name-modal__icon">
-              <VideoIcon size={26} />
-            </div>
-            <h2>What's your name?</h2>
-            <p className="name-modal__sub">Others in the room will see this.</p>
-            <input
-              autoFocus
-              value={draft}
-              placeholder="Your name"
-              onChange={(e) => setDraft(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && join()}
-            />
-            <button className="btn btn--primary" onClick={join}>Join call</button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {!name && (
+          <motion.div className="name-modal" {...fadeIn()}>
+            <motion.div className="name-modal__card" {...scaleIn()}>
+              <div className="name-modal__icon">
+                <VideoIcon size={26} />
+              </div>
+              <h2>What's your name?</h2>
+              <p className="name-modal__sub">Others in the room will see this.</p>
+              <input
+                autoFocus
+                value={draft}
+                placeholder="Your name"
+                onChange={(e) => setDraft(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && join()}
+              />
+              <button className="btn btn--primary" onClick={join}>Join call</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
