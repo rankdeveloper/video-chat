@@ -15,11 +15,12 @@ export default function Contact() {
     (k: keyof typeof empty) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm({ ...form, [k]: e.target.value });
+  const API_URL = import.meta.env.VITE_API_URL;
 
   async function submit(e: FormEvent) {
     e.preventDefault();
     try {
-      const res = await fetch("/api/feedback", {
+      const res = await fetch(`${API_URL}/api/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -44,15 +45,33 @@ export default function Contact() {
           <h2>We'd love to hear from you</h2>
           <form onSubmit={submit}>
             <label htmlFor="username">Your name</label>
-            <input id="username" value={form.userName} onChange={set("userName")} required />
+            <input
+              id="username"
+              value={form.userName}
+              onChange={set("userName")}
+              required
+            />
 
             <label htmlFor="email">Email address</label>
-            <input id="email" type="email" value={form.emailId} onChange={set("emailId")} required />
+            <input
+              id="email"
+              type="email"
+              value={form.emailId}
+              onChange={set("emailId")}
+              required
+            />
 
             <label htmlFor="message">Message</label>
-            <textarea id="message" value={form.message} onChange={set("message")} required />
+            <textarea
+              id="message"
+              value={form.message}
+              onChange={set("message")}
+              required
+            />
 
-            <button type="submit" className="btn btn--primary">Send message</button>
+            <button type="submit" className="btn btn--primary">
+              Send message
+            </button>
           </form>
 
           {status === "ok" && (
